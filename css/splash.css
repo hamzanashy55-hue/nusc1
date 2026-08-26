@@ -5,28 +5,12 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--primary-black);
+    background: #030305; /* سواد عميق جداً */
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 9999;
     overflow: hidden;
-}
-
-.splash-screen::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle at center, rgba(212, 168, 67, 0.05) 0%, transparent 50%);
-    animation: splashBgRotate 20s linear infinite;
-}
-
-@keyframes splashBgRotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
 }
 
 .splash-content {
@@ -35,40 +19,41 @@
     z-index: 2;
 }
 
-/* Logo Container */
+/* الشعار وتأثير الدوائر والوميض */
 .logo-container {
     position: relative;
-    width: 180px;
-    height: 180px;
-    margin: 0 auto 40px;
+    width: 190px;
+    height: 190px;
+    margin: 0 auto 30px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .splash-logo {
-    width: 100px;
-    height: 100px;
+    width: 110px;
+    height: 110px;
     object-fit: contain;
+    border-radius: 50%;
     position: relative;
     z-index: 5;
     opacity: 0;
-    transform: scale(0.3) rotate(-180deg);
-    animation: logoReveal 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.5s forwards;
-    filter: drop-shadow(0 0 20px rgba(212, 168, 67, 0.5));
+    transform: scale(0.2);
+    animation: logoPop 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.4s forwards;
+    filter: drop-shadow(0 0 25px rgba(212, 168, 67, 0.7));
 }
 
-@keyframes logoReveal {
+@keyframes logoPop {
     to {
         opacity: 1;
-        transform: scale(1) rotate(0deg);
+        transform: scale(1);
     }
 }
 
 .logo-glow {
     position: absolute;
-    width: 120px;
-    height: 120px;
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
     background: radial-gradient(circle, rgba(212, 168, 67, 0.4) 0%, transparent 70%);
     z-index: 3;
@@ -81,45 +66,32 @@
     50% { opacity: 1; transform: scale(1.2); }
 }
 
-/* Rings */
+/* الحلقات الدوارة حول الشعار */
 .logo-ring {
     position: absolute;
     border-radius: 50%;
-    border: 2px solid transparent;
 }
 
 .ring-1 {
-    width: 130px;
-    height: 130px;
-    border-top-color: var(--primary-gold);
-    border-right-color: var(--primary-gold);
-    opacity: 0;
-    animation: ringAppear 0.8s ease 0.8s forwards, ringSpin 3s linear 1.6s infinite;
+    width: 140px;
+    height: 140px;
+    border: 2px dashed var(--primary-gold);
+    animation: ringSpin 6s linear infinite;
 }
 
 .ring-2 {
-    width: 155px;
-    height: 155px;
-    border-bottom-color: var(--primary-gold-light);
-    border-left-color: var(--primary-gold-light);
-    opacity: 0;
-    animation: ringAppear 0.8s ease 1s forwards, ringSpinReverse 4s linear 1.8s infinite;
+    width: 165px;
+    height: 165px;
+    border: 1.5px solid rgba(232, 200, 114, 0.4);
+    border-top-color: var(--primary-gold-light);
+    animation: ringSpinReverse 4s linear infinite;
 }
 
 .ring-3 {
-    width: 178px;
-    height: 178px;
-    border-top-color: rgba(212, 168, 67, 0.3);
-    border-right-color: rgba(212, 168, 67, 0.3);
-    border-bottom-color: transparent;
-    border-left-color: rgba(212, 168, 67, 0.3);
-    opacity: 0;
-    animation: ringAppear 0.8s ease 1.2s forwards, ringSpin 5s linear 2s infinite;
-}
-
-@keyframes ringAppear {
-    from { opacity: 0; transform: scale(0.5); }
-    to { opacity: 1; transform: scale(1); }
+    width: 190px;
+    height: 190px;
+    border: 1px dotted rgba(212, 168, 67, 0.5);
+    animation: ringSpin 10s linear infinite;
 }
 
 @keyframes ringSpin {
@@ -207,40 +179,18 @@
     to { opacity: 1; }
 }
 
-/* Particles */
-.particles {
+/* النجوم اللامعة ✨ */
+.star-particle {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    color: var(--primary-gold-light);
+    font-size: 1rem;
     pointer-events: none;
-    z-index: 1;
+    animation: starTwinkle 2.5s ease-in-out infinite;
 }
 
-.particle {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: var(--primary-gold);
-    border-radius: 50%;
-    opacity: 0;
-    animation: particleFloat 3s ease-in-out infinite;
-}
-
-@keyframes particleFloat {
-    0% {
-        opacity: 0;
-        transform: translateY(0) scale(0);
-    }
-    50% {
-        opacity: 0.8;
-        transform: translateY(-100px) scale(1);
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(-200px) scale(0);
-    }
+@keyframes starTwinkle {
+    0%, 100% { opacity: 0.1; transform: scale(0.4) rotate(0deg); }
+    50% { opacity: 1; transform: scale(1.2) rotate(45deg); filter: drop-shadow(0 0 8px #fff); }
 }
 
 /* Splash Fade Out */
@@ -258,7 +208,8 @@
         transform: scale(1.1);
     }
 }
-/* ==================== CAMPUS INTERACTIVE SCREEN ==================== */
+
+/* ==================== CAMPUS DIVE-IN ANIMATION ==================== */
 .campus-screen {
     position: fixed;
     top: 0;
@@ -267,6 +218,7 @@
     height: 100%;
     z-index: 8000;
     overflow: hidden;
+    background: #000;
 }
 
 .campus-bg {
@@ -276,12 +228,14 @@
     width: 100%;
     height: 100%;
     background: url('../campus-exterior.png') no-repeat center 35% / cover;
-    transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+    transform-origin: 50% 65%; /* نقطة الارتكاز عند الباب */
+    transition: transform 1s cubic-bezier(0.7, 0, 0.3, 1), filter 0.8s ease, opacity 0.5s ease 0.5s;
 }
 
-/* حركة الزوم لما تضغط على الباب */
+/* اندفاع الكاميرا لداخل الباب */
 .campus-screen.zoom-in .campus-bg {
-    transform: scale(2.2);
+    transform: scale(7);
+    filter: brightness(2) blur(4px);
     opacity: 0;
 }
 
@@ -296,6 +250,11 @@
     align-items: center;
     cursor: pointer;
     z-index: 10;
+}
+
+.campus-screen.zoom-in .door-hotspot {
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .hotspot-badge {
