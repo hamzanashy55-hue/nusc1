@@ -434,16 +434,26 @@
 }
 
 /* Responsive */
+/* ==================== RESPONSIVE FOR MOBILE ==================== */
 @media (max-width: 768px) {
     .login-page {
         padding: 15px;
         justify-content: center;
+        min-height: 100vh;
+    }
+
+    /* ضمان بقاء صورة البهو الداخلي واضحة في خلفية الموبايل */
+    .login-page::before {
+        background: linear-gradient(rgba(10, 15, 29, 0.55), rgba(10, 15, 29, 0.75)), 
+                    url('../campus-interior.png') no-repeat center center / cover !important;
     }
 
     .login-container {
         max-width: 100%;
+        width: 100%;
         padding: 25px 18px;
         border-radius: var(--radius-md);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
     }
 
     .login-header h1 {
