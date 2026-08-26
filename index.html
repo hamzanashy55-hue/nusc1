@@ -21,10 +21,8 @@
             <div class="vector-logo-container">
                 <svg class="nusc-svg-emblem" viewBox="0 0 300 300">
                     <defs>
-                        <!-- مسار النص العلوي الإنجليزي -->
-                        <path id="text-path-en" d="M 40,150 A 110,110 0 1,1 260,150" fill="none"/>
-                        <!-- مسار النص السفلي العربي -->
-                        <path id="text-path-ar" d="M 260,150 A 110,110 0 0,1 40,150" fill="none"/>
+                        <path id="text-path-en" d="M 42,150 A 108,108 0 1,1 258,150" fill="none"/>
+                        <path id="text-path-ar" d="M 258,150 A 108,108 0 0,1 42,150" fill="none"/>
                         <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
                             <stop offset="0%" stop-color="#F9E498" />
                             <stop offset="50%" stop-color="#D4A843" />
@@ -32,10 +30,12 @@
                         </linearGradient>
                     </defs>
 
-                    <!-- الحلقات الخارجية الدوارة -->
+                    <!-- الحلقات الخارجية -->
                     <circle class="svg-ring outer-orbit" cx="150" cy="150" r="142" />
-                    <circle class="svg-ring middle-ring" cx="150" cy="150" r="132" />
-                    <circle class="svg-ring inner-ring" cx="150" cy="150" r="92" />
+                    
+                    <!-- القرص الأبيض للشعار الرسمي -->
+                    <circle class="emblem-white-bg" cx="150" cy="150" r="130" fill="#FFFFFF" stroke="url(#gold-grad)" stroke-width="5" />
+                    <circle cx="150" cy="150" r="88" fill="none" stroke="#D4A843" stroke-width="1.5" stroke-dasharray="4 4" />
 
                     <!-- النص الإنجليزي العلوي -->
                     <text class="svg-text svg-text-en">
@@ -51,24 +51,17 @@
                         </textPath>
                     </text>
 
-                    <!-- قلب الشعار (الكتاب والنواة) -->
+                    <!-- قلب الشعار -->
                     <g class="svg-core">
                         <!-- الكتاب المفتوح -->
-                        <path class="svg-book" d="M 125,130 C 135,128 145,132 150,136 C 155,132 165,128 175,130 L 175,165 C 165,162 155,165 150,168 C 145,165 135,162 125,165 Z" fill="url(#gold-grad)"/>
-                        <path d="M 150,136 L 150,168" stroke="#000" stroke-width="2"/>
-                        <!-- أشعة العلم -->
-                        <line class="svg-ray" x1="150" y1="124" x2="150" y2="114" stroke="url(#gold-grad)" stroke-width="2.5" stroke-linecap="round"/>
-                        <line class="svg-ray" x1="135" y1="127" x2="128" y2="118" stroke="url(#gold-grad)" stroke-width="2.5" stroke-linecap="round"/>
-                        <line class="svg-ray" x1="165" y1="127" x2="172" y2="118" stroke="url(#gold-grad)" stroke-width="2.5" stroke-linecap="round"/>
-                        <!-- السنابل الجانبية -->
-                        <circle cx="108" cy="150" r="4" fill="url(#gold-grad)"/>
-                        <circle cx="112" cy="162" r="3.5" fill="url(#gold-grad)"/>
-                        <circle cx="118" cy="172" r="3" fill="url(#gold-grad)"/>
-                        <circle cx="192" cy="150" r="4" fill="url(#gold-grad)"/>
-                        <circle cx="188" cy="162" r="3.5" fill="url(#gold-grad)"/>
-                        <circle cx="182" cy="172" r="3" fill="url(#gold-grad)"/>
-                        <!-- كلمة NUSC في المنتصف -->
-                        <text x="150" y="185" text-anchor="middle" class="svg-center-nusc">NUSC</text>
+                        <path class="svg-book" d="M 125,128 C 135,126 145,130 150,134 C 155,130 165,126 175,128 L 175,162 C 165,159 155,162 150,165 C 145,162 135,159 125,162 Z" fill="url(#gold-grad)"/>
+                        <path d="M 150,134 L 150,165" stroke="#FFFFFF" stroke-width="2"/>
+                        <!-- الأشعة والسنابل -->
+                        <line x1="150" y1="122" x2="150" y2="112" stroke="#D4A843" stroke-width="2.5" stroke-linecap="round"/>
+                        <line x1="135" y1="125" x2="128" y2="116" stroke="#D4A843" stroke-width="2.5" stroke-linecap="round"/>
+                        <line x1="165" y1="125" x2="172" y2="116" stroke="#D4A843" stroke-width="2.5" stroke-linecap="round"/>
+                        <!-- كلمة NUSC -->
+                        <text x="150" y="182" text-anchor="middle" class="svg-center-nusc">NUSC</text>
                     </g>
                 </svg>
             </div>
@@ -80,8 +73,14 @@
                 <span class="letter" style="--delay: 3">C</span>
             </div>
             <div class="university-subtitle">المنصة الرسمية للجامعة</div>
+            
+            <!-- شريط التحميل -->
+            <div class="loading-bar">
+                <div class="loading-fill"></div>
+            </div>
         </div>
     </div>
+        <!-- Campus Interactive Screen -->
     <!-- Campus Interactive Screen -->
     <div id="campus-screen" class="campus-screen hidden">
         <div class="campus-bg"></div>
@@ -89,7 +88,7 @@
             <div class="pulse-ring"></div>
             <div class="hotspot-badge">
                 <i class="fas fa-door-open"></i>
-                <span>اضغط للدخول إلى الجامعة</span>
+                <span>يلا بينا ندخل الجامعة</span>
             </div>
             <i class="fas fa-chevron-down hotspot-arrow"></i>
         </div>
