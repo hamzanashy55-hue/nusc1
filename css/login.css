@@ -126,12 +126,15 @@
 }
 
 .login-logo {
-    width: 70px;
-    height: 70px;
-    object-fit: contain;
-    margin-bottom: 15px;
-    filter: drop-shadow(0 0 15px rgba(212, 168, 67, 0.4));
-    animation: logoFloat 3s ease-in-out infinite;
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: 50%; /* يجعل الشعار دائري تماماً ويقص الحواف البيضاء */
+    border: 2px solid var(--primary-gold);
+    padding: 2px;
+    background: #000;
+    margin-bottom: 12px;
+    filter: drop-shadow(0 0 12px rgba(212, 168, 67, 0.5));
 }
 
 @keyframes logoFloat {

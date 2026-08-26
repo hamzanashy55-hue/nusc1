@@ -16,14 +16,63 @@
 
     <!-- Splash Screen -->
     <div id="splash-screen" class="splash-screen">
+        <div class="particles" id="particles"></div>
         <div class="splash-content">
-            <div class="logo-container">
-                <div class="logo-ring ring-1"></div>
-                <div class="logo-ring ring-2"></div>
-                <div class="logo-ring ring-3"></div>
-                <div class="logo-glow"></div>
-                <img src="nusc-logo.png" alt="NUSC Logo" class="splash-logo" id="splash-logo">
+            <div class="vector-logo-container">
+                <svg class="nusc-svg-emblem" viewBox="0 0 300 300">
+                    <defs>
+                        <!-- مسار النص العلوي الإنجليزي -->
+                        <path id="text-path-en" d="M 40,150 A 110,110 0 1,1 260,150" fill="none"/>
+                        <!-- مسار النص السفلي العربي -->
+                        <path id="text-path-ar" d="M 260,150 A 110,110 0 0,1 40,150" fill="none"/>
+                        <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#F9E498" />
+                            <stop offset="50%" stop-color="#D4A843" />
+                            <stop offset="100%" stop-color="#9A7020" />
+                        </linearGradient>
+                    </defs>
+
+                    <!-- الحلقات الخارجية الدوارة -->
+                    <circle class="svg-ring outer-orbit" cx="150" cy="150" r="142" />
+                    <circle class="svg-ring middle-ring" cx="150" cy="150" r="132" />
+                    <circle class="svg-ring inner-ring" cx="150" cy="150" r="92" />
+
+                    <!-- النص الإنجليزي العلوي -->
+                    <text class="svg-text svg-text-en">
+                        <textPath href="#text-path-en" startOffset="50%" text-anchor="middle">
+                            NATIONAL UNIVERSITY OF SADAT CITY
+                        </textPath>
+                    </text>
+
+                    <!-- النص العربي السفلي -->
+                    <text class="svg-text svg-text-ar">
+                        <textPath href="#text-path-ar" startOffset="50%" text-anchor="middle">
+                            جامعة مدينة السادات الأهلية
+                        </textPath>
+                    </text>
+
+                    <!-- قلب الشعار (الكتاب والنواة) -->
+                    <g class="svg-core">
+                        <!-- الكتاب المفتوح -->
+                        <path class="svg-book" d="M 125,130 C 135,128 145,132 150,136 C 155,132 165,128 175,130 L 175,165 C 165,162 155,165 150,168 C 145,165 135,162 125,165 Z" fill="url(#gold-grad)"/>
+                        <path d="M 150,136 L 150,168" stroke="#000" stroke-width="2"/>
+                        <!-- أشعة العلم -->
+                        <line class="svg-ray" x1="150" y1="124" x2="150" y2="114" stroke="url(#gold-grad)" stroke-width="2.5" stroke-linecap="round"/>
+                        <line class="svg-ray" x1="135" y1="127" x2="128" y2="118" stroke="url(#gold-grad)" stroke-width="2.5" stroke-linecap="round"/>
+                        <line class="svg-ray" x1="165" y1="127" x2="172" y2="118" stroke="url(#gold-grad)" stroke-width="2.5" stroke-linecap="round"/>
+                        <!-- السنابل الجانبية -->
+                        <circle cx="108" cy="150" r="4" fill="url(#gold-grad)"/>
+                        <circle cx="112" cy="162" r="3.5" fill="url(#gold-grad)"/>
+                        <circle cx="118" cy="172" r="3" fill="url(#gold-grad)"/>
+                        <circle cx="192" cy="150" r="4" fill="url(#gold-grad)"/>
+                        <circle cx="188" cy="162" r="3.5" fill="url(#gold-grad)"/>
+                        <circle cx="182" cy="172" r="3" fill="url(#gold-grad)"/>
+                        <!-- كلمة NUSC في المنتصف -->
+                        <text x="150" y="185" text-anchor="middle" class="svg-center-nusc">NUSC</text>
+                    </g>
+                </svg>
             </div>
+
             <div class="university-name" dir="ltr">
                 <span class="letter" style="--delay: 0">N</span>
                 <span class="letter" style="--delay: 1">U</span>
@@ -31,10 +80,6 @@
                 <span class="letter" style="--delay: 3">C</span>
             </div>
             <div class="university-subtitle">المنصة الرسمية للجامعة</div>
-            <div class="loading-bar">
-                <div class="loading-fill"></div>
-            </div>
-            <div class="particles" id="particles"></div>
         </div>
     </div>
     <!-- Campus Interactive Screen -->
