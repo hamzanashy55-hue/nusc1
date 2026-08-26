@@ -40,102 +40,148 @@
     text-align: center;
     position: relative;
     z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-/* مسرح حركة الشعار والحلقات */
-.logo-cinematic-stage {
-    position: relative;
-    width: 250px;
-    height: 250px;
+/* ==================== VECTOR LOGO ANIMATIONS ==================== */
+.vector-logo-container {
+    width: 220px;
+    height: 220px;
     margin: 0 auto 20px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* الحلقات الخارجية المتوهجة */
-.orbit-ring {
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
+.nusc-interactive-svg {
+    overflow: visible;
+    filter: drop-shadow(0 0 15px rgba(212, 168, 67, 0.4));
 }
 
-.orbit-outer {
-    width: 240px;
-    height: 240px;
-    border: 2px dashed rgba(212, 168, 67, 0.7);
-    animation: rotateClockwise 14s linear infinite;
+/* 1. ظهور الخلفية البيضاء */
+.anim-bg-circle {
+    opacity: 0;
+    transform-origin: center;
+    transform: scale(0.6);
+    animation: bgFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
 }
 
-.orbit-middle {
-    width: 215px;
-    height: 215px;
-    border: 1.5px solid transparent;
-    border-top: 2px solid #F9E498;
-    border-bottom: 2px solid #D4A843;
-    animation: rotateCounter 8s linear infinite;
+@keyframes bgFadeIn {
+    to { opacity: 1; transform: scale(1); }
 }
 
-.orbit-glow {
-    position: absolute;
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(212, 168, 67, 0.35) 0%, transparent 70%);
-    animation: pulseGlow 3s ease-in-out infinite;
-    z-index: 2;
+/* 2. رسم وتدوير الحلقات */
+.anim-ring {
+    fill: none;
+    transform-origin: center;
 }
 
-@keyframes rotateClockwise {
+.outer-ring {
+    stroke: rgba(212, 168, 67, 0.6);
+    stroke-width: 1.5;
+    stroke-dasharray: 8 12;
+    animation: spinClockwise 14s linear infinite;
+}
+
+.main-gold-border {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: drawStroke 1.5s ease-out 0.4s forwards;
+}
+
+.inner-gold-border {
+    animation: spinCounter 10s linear infinite;
+}
+
+@keyframes drawStroke {
+    to { stroke-dashoffset: 0; }
+}
+
+@keyframes spinClockwise {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
 }
 
-@keyframes rotateCounter {
+@keyframes spinCounter {
     from { transform: rotate(0deg); }
     to { transform: rotate(-360deg); }
 }
 
-@keyframes pulseGlow {
-    0%, 100% { transform: scale(0.9); opacity: 0.5; }
-    50% { transform: scale(1.15); opacity: 0.9; filter: drop-shadow(0 0 15px rgba(212, 168, 67, 0.8)); }
-}
-
-/* تصميم وظهور الشعار الأصلي المقصوص دائرياً */
-.official-emblem-wrapper {
-    position: relative;
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    background: #FFFFFF;
-    overflow: hidden;
-    z-index: 5;
-    box-shadow: 0 0 25px rgba(212, 168, 67, 0.6);
+/* 3. ظهور النصوص تدريجياً */
+.anim-text {
+    font-family: 'Cairo', sans-serif;
+    font-weight: 800;
+    fill: #1A1A2E;
     opacity: 0;
-    transform: scale(0.2);
-    animation: emblemEntrance 1.1s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.4s forwards, emblemBreathing 3.5s ease-in-out 1.5s infinite;
 }
 
-.official-emblem-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+.text-en {
+    font-size: 14.5px;
+    letter-spacing: 2px;
+    animation: textFadeIn 0.8s ease 1s forwards;
 }
 
-@keyframes emblemEntrance {
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+.text-ar {
+    font-size: 17px;
+    letter-spacing: 1px;
+    animation: textFadeIn 0.8s ease 1.3s forwards;
 }
 
-@keyframes emblemBreathing {
-    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(212, 168, 67, 0.4)); }
-    50% { transform: scale(1.04); filter: drop-shadow(0 0 22px rgba(212, 168, 67, 0.9)); }
+@keyframes textFadeIn {
+    to { opacity: 1; }
 }
 
-/* اسم NUSC */
+/* 4. نمو أغصان الزيتون */
+.anim-wreath {
+    opacity: 0;
+    transform-origin: bottom center;
+    animation: wreathGrow 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1.6s forwards;
+}
+
+@keyframes wreathGrow {
+    from { opacity: 0; transform: scale(0.4) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* 5. انطلاق أشعة الشمس */
+.anim-sunburst {
+    opacity: 0;
+    transform-origin: center;
+    animation: sunPop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1.9s forwards;
+}
+
+@keyframes sunPop {
+    from { opacity: 0; transform: scale(0.2); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* 6. قلب الشعار والكتاب والنبض المستمر */
+.anim-core-book {
+    opacity: 0;
+    transform-origin: center;
+    animation: coreEntrance 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 2.1s forwards, coreHeartbeat 3s ease-in-out 3s infinite;
+}
+
+.anim-inner-nusc {
+    font-size: 19px;
+    font-weight: 900;
+    fill: #8E6314;
+    letter-spacing: 2px;
+}
+
+@keyframes coreEntrance {
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes coreHeartbeat {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(212, 168, 67, 0.4)); }
+    50% { transform: scale(1.05); filter: drop-shadow(0 0 12px rgba(212, 168, 67, 0.9)); }
+}
+
+/* ==================== NUSC LETTERS & LOADING ==================== */
 .university-name {
     font-size: 3.2rem;
     font-weight: 900;
@@ -148,7 +194,7 @@
     opacity: 0;
     transform: translateY(30px);
     animation: letterReveal 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    animation-delay: calc(1.5s + var(--delay) * 0.15s);
+    animation-delay: calc(2.4s + var(--delay) * 0.15s);
     background: linear-gradient(135deg, #F9E498, #D4A843);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -162,7 +208,7 @@
     font-size: 1rem;
     color: #ADB5BD;
     opacity: 0;
-    animation: subtitleReveal 0.8s ease 2.2s forwards;
+    animation: subtitleReveal 0.8s ease 3s forwards;
     letter-spacing: 2px;
 }
 
@@ -179,7 +225,7 @@
     margin: 20px auto 0;
     overflow: hidden;
     opacity: 0;
-    animation: fadeIn 0.5s ease 2.3s forwards;
+    animation: fadeIn 0.5s ease 2.8s forwards;
 }
 
 .loading-fill {
@@ -187,7 +233,7 @@
     height: 100%;
     background: linear-gradient(90deg, #D4A843, #F9E498);
     border-radius: 10px;
-    animation: loadingProgress 2.2s ease 2.5s forwards;
+    animation: loadingProgress 2.2s ease 3s forwards;
 }
 
 @keyframes loadingProgress {
