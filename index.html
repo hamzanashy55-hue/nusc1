@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NUSC</title>
+    <link rel="icon" href="nusc-logo.png" type="image/png">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/splash.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/register.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Splash Screen -->
+    <div id="splash-screen" class="splash-screen">
+        <div class="splash-content">
+            <div class="logo-container">
+                <div class="logo-ring ring-1"></div>
+                <div class="logo-ring ring-2"></div>
+                <div class="logo-ring ring-3"></div>
+                <div class="logo-glow"></div>
+                <img src="nusc-logo.png" alt="NUSC Logo" class="splash-logo" id="splash-logo">
+            </div>
+            <div class="university-name">
+                <span class="letter" style="--delay: 0">N</span>
+                <span class="letter" style="--delay: 1">U</span>
+                <span class="letter" style="--delay: 2">S</span>
+                <span class="letter" style="--delay: 3">C</span>
+            </div>
+            <div class="university-subtitle">المنصة الرسمية للجامعة</div>
+            <div class="loading-bar">
+                <div class="loading-fill"></div>
+            </div>
+            <div class="particles" id="particles"></div>
+        </div>
+    </div>
+
+    <!-- Login Page -->
+    <div id="login-page" class="login-page hidden">
+        <div class="login-bg-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+        <div class="login-container">
+            <div class="login-header">
+                <img src="nusc-logo.png" alt="NUSC" class="login-logo">
+                <h1>المنصة الرسمية</h1>
+                <p>مرحباً بك في منصة NUSC</p>
+            </div>
+
+            <!-- Role Tabs -->
+            <div class="role-tabs">
+                <button class="role-tab active" data-role="student" onclick="switchRole('student')">
+                    <i class="fas fa-user-graduate"></i>
+                    طالب
+                </button>
+                <button class="role-tab" data-role="supervisor" onclick="switchRole('supervisor')">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    مشرف
+                </button>
+                <div class="tab-slider"></div>
+            </div>
+
+            <!-- Login Form -->
+            <form class="login-form" id="login-form" onsubmit="handleLogin(event)">
+                <div class="input-group">
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="login-email" placeholder="البريد الإلكتروني" required>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="login-password" placeholder="كلمة المرور" required>
+                        <button type="button" class="toggle-password" onclick="togglePassword('login-password', this)">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="login-options">
+                    <label class="remember-me">
+                        <input type="checkbox" id="remember-me">
+                        <span class="checkmark"></span>
+                        حفظ كلمة المرور
+                    </label>
+                    <a href="#" class="forgot-password" onclick="showForgotPassword()">نسيت كلمة السر؟</a>
+                </div>
+
+                <button type="submit" class="btn-login">
+                    <span>تسجيل الدخول</span>
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+
+                <div class="register-link">
+                    ليس لديك حساب؟
+                    <a href="#" onclick="showRegisterPage()">إنشاء حساب جديد</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Page -->
+    <div id="register-page" class="register-page hidden">
+        <div class="register-bg-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+        </div>
+        <div class="register-container">
+            <div class="register-header">
+                <button class="back-btn" onclick="showLoginPage()">
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+                <img src="nusc-logo.png" alt="NUSC" class="register-logo">
+                <h1>إنشاء حساب جديد</h1>
+            </div>
+
+            <!-- Role Tabs for Register -->
+            <div class="role-tabs register-role-tabs">
+                <button class="role-tab active" data-role="student" onclick="switchRegisterRole('student')">
+                    <i class="fas fa-user-graduate"></i>
+                    طالب
+                </button>
+                <button class="role-tab" data-role="supervisor" onclick="switchRegisterRole('supervisor')">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    مشرف
+                </button>
+                <div class="tab-slider"></div>
+            </div>
+
+            <!-- Student Registration Form -->
+            <form class="register-form" id="student-register-form" onsubmit="handleStudentRegister(event)">
+                <div class="form-section">
+                    <h3><i class="fas fa-user"></i> البيانات الشخصية</h3>
+
+                    <div class="input-group">
+                        <label>الاسم بالكامل (خماسي) <span class="required">*</span></label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="student-fullname" placeholder="الاسم الأول / الأب / الجد / العائلة / اللقب" required>
+                        </div>
+                        <small class="field-hint">يجب إدخال الاسم خماسي كامل</small>
+                    </div>
+
+                    <div class="input-group">
+                        <label>البريد الإلكتروني الخاص <span class="required">*</span></label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="student-personal-email" placeholder="example@gmail.com" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>البريد الإلكتروني الجامعي <span class="optional">(اختياري)</span></label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-university"></i>
+                            <input type="email" id="student-university-email" placeholder="student@university.edu.eg">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>كود الطالب <span class="required">*</span></label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-id-card"></i>
+                            <input type="text" id="student-code" placeholder="أدخل كود الطالب" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3><i class="fas fa-graduation-cap"></i> البيانات الأكاديمية</h3>
+
+                    <div class="input-group">
+                        <label>الكلية <span class="required">*</span></label>
+                        <div class="input-wrapper select-wrapper">
+                            <i class="fas fa-building-columns"></i>
+                            <select id="student-faculty" required onchange="onFacultyChange()">
+                                <option value="">اختر الكلية</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>الفرقة <span class="required">*</span></label>
+                        <div class="input-wrapper select-wrapper">
+                            <i class="fas fa-layer-group"></i>
+                            <select id="student-year" required disabled>
+                                <option value="">اختر الفرقة</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>التخصص <span class="required">*</span></label>
+                        <div class="input-wrapper select-wrapper">
+                            <i class="fas fa-microscope"></i>
+                            <select id="student-specialization" required disabled>
+                                <option value="">اختر التخصص</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3><i class="fas fa-shield-alt"></i> كلمة المرور</h3>
+
+                    <div class="input-group">
+                        <label>كلمة المرور <span class="required">*</span></label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="student-password" placeholder="أدخل كلمة المرور" required oninput="checkPasswordStrength(this.value)">
+                            <button type="button" class="toggle-password" onclick="togglePassword('student-password', this)">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <small class="field-hint">يجب ألا تقل عن 8 أحرف وتحتوي على حروف كبيرة وصغيرة ورمز خاص #</small>
+                        <div class="password-strength">
+                            <div class="strength-bar">
+                                <div class="strength-fill" id="strength-fill"></div>
+                            </div>
+                            <span class="strength-text" id="strength-text"></span>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>تأكيد كلمة المرور <span class="required">*</span></label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="student-confirm-password" placeholder="أعد إدخال كلمة المرور" required>
+                            <button type="button" class="toggle-password" onclick="togglePassword('student-confirm-password', this)">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <small class="password-match-msg" id="password-match-msg"></small>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-register">
+                    <span>إنشاء الحساب</span>
+                    <i class="fas fa-user-plus"></i>
+                </button>
+            </form>
+
+            <!-- Supervisor Registration Form -->
+            <form class="register-form hidden" id="supervisor-register-form" onsubmit="handleSupervisorRegister(event)">
+                <div class="form-section">
+                    <h3><i class="fas fa-user"></i> البيانات الشخصية</h3>
+
+                    <div class="input-group">
+                        <label>الاسم بالكامل (رباعي) <span class="required">*</span></label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="supervisor-fullname" placeholder="الاسم الأول / الأب / الجد / العائلة" required>
+                        </div>
+                        <small class="field-hint">يجب إدخال الاسم رباعي كامل</small>
+                    </div>
+
+                    <div class="input-group">
+                        <label>البريد الإلكتروني الخاص <span class="required">*</span></label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="supervisor-email" placeholder="example@gmail.com" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3><i class="fas fa-building-columns"></i> البيانات الأكاديمية</h3>
+
+                    <div class="input-group">
+                        <label>الكليات <span class="required">*</span></label>
+                        <div class="multi-select-container" id="supervisor-faculties-container">
+                            <div class="multi-select-header" onclick="toggleMultiSelect('supervisor-faculties-dropdown')">
+                                <span class="multi-select-placeholder">اختر الكلية / الكليات</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="multi-select-dropdown hidden" id="supervisor-faculties-dropdown">
+                                <!-- Will be populated by JS -->
+                            </div>
+                            <div class="selected-tags" id="supervisor-selected-faculties"></div>
+                        </div>
+                    </div>
+
+                    <div class="supervisor-subjects-area" id="supervisor-subjects-area">
+                        <!-- Dynamic subject fields will appear here -->
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3><i class="fas fa-shield-alt"></i> كلمة المرور</h3>
+
+                    <div class="input-group">
+                        <label>كلمة المرور <span class="required">*</span></label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="supervisor-password" placeholder="أدخل كلمة المرور" required oninput="checkPasswordStrengthSupervisor(this.value)">
+                            <button type="button" class="toggle-password" onclick="togglePassword('supervisor-password', this)">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <small class="field-hint">يجب ألا تقل عن 8 أحرف وتحتوي على حروف كبيرة وصغيرة ورمز خاص #</small>
+                        <div class="password-strength">
+                            <div class="strength-bar">
+                                <div class="strength-fill" id="supervisor-strength-fill"></div>
+                            </div>
+                            <span class="strength-text" id="supervisor-strength-text"></span>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>تأكيد كلمة المرور <span class="required">*</span></label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="supervisor-confirm-password" placeholder="أعد إدخال كلمة المرور" required>
+                            <button type="button" class="toggle-password" onclick="togglePassword('supervisor-confirm-password', this)">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-register">
+                    <span>إنشاء الحساب</span>
+                    <i class="fas fa-user-plus"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div id="forgot-password-modal" class="modal hidden">
+        <div class="modal-overlay" onclick="closeForgotPassword()"></div>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeForgotPassword()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-icon">
+                <i class="fas fa-key"></i>
+            </div>
+            <h2>نسيت كلمة السر؟</h2>
+            <p>أدخل بريدك الإلكتروني وسنرسل لك رابط إعادة تعيين كلمة المرور</p>
+            <div class="input-group">
+                <div class="input-wrapper">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="forgot-email" placeholder="البريد الإلكتروني">
+                </div>
+            </div>
+            <button class="btn-login" onclick="handleForgotPassword()">
+                <span>إرسال رابط الاستعادة</span>
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast hidden">
+        <div class="toast-icon"><i class="fas fa-check-circle"></i></div>
+        <div class="toast-message" id="toast-message"></div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/splash.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/register.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
