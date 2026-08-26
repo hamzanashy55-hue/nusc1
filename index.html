@@ -18,54 +18,20 @@
     <div id="splash-screen" class="splash-screen">
         <div class="particles" id="particles"></div>
         <div class="splash-content">
-            <div class="vector-logo-container">
-                <svg class="nusc-svg-emblem" viewBox="0 0 300 300">
-                    <defs>
-                        <path id="text-path-en" d="M 42,150 A 108,108 0 1,1 258,150" fill="none"/>
-                        <path id="text-path-ar" d="M 258,150 A 108,108 0 0,1 42,150" fill="none"/>
-                        <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#F9E498" />
-                            <stop offset="50%" stop-color="#D4A843" />
-                            <stop offset="100%" stop-color="#9A7020" />
-                        </linearGradient>
-                    </defs>
+            <!-- حاوية الشعار مع الحلقات المنفصلة -->
+            <div class="logo-cinematic-stage">
+                <!-- حلقات الدوران والنبض -->
+                <div class="orbit-ring orbit-outer"></div>
+                <div class="orbit-ring orbit-middle"></div>
+                <div class="orbit-glow"></div>
 
-                    <!-- الحلقات الخارجية -->
-                    <circle class="svg-ring outer-orbit" cx="150" cy="150" r="142" />
-                    
-                    <!-- القرص الأبيض للشعار الرسمي -->
-                    <circle class="emblem-white-bg" cx="150" cy="150" r="130" fill="#FFFFFF" stroke="url(#gold-grad)" stroke-width="5" />
-                    <circle cx="150" cy="150" r="88" fill="none" stroke="#D4A843" stroke-width="1.5" stroke-dasharray="4 4" />
-
-                    <!-- النص الإنجليزي العلوي -->
-                    <text class="svg-text svg-text-en">
-                        <textPath href="#text-path-en" startOffset="50%" text-anchor="middle">
-                            NATIONAL UNIVERSITY OF SADAT CITY
-                        </textPath>
-                    </text>
-
-                    <!-- النص العربي السفلي -->
-                    <text class="svg-text svg-text-ar">
-                        <textPath href="#text-path-ar" startOffset="50%" text-anchor="middle">
-                            جامعة مدينة السادات الأهلية
-                        </textPath>
-                    </text>
-
-                    <!-- قلب الشعار -->
-                    <g class="svg-core">
-                        <!-- الكتاب المفتوح -->
-                        <path class="svg-book" d="M 125,128 C 135,126 145,130 150,134 C 155,130 165,126 175,128 L 175,162 C 165,159 155,162 150,165 C 145,162 135,159 125,162 Z" fill="url(#gold-grad)"/>
-                        <path d="M 150,134 L 150,165" stroke="#FFFFFF" stroke-width="2"/>
-                        <!-- الأشعة والسنابل -->
-                        <line x1="150" y1="122" x2="150" y2="112" stroke="#D4A843" stroke-width="2.5" stroke-linecap="round"/>
-                        <line x1="135" y1="125" x2="128" y2="116" stroke="#D4A843" stroke-width="2.5" stroke-linecap="round"/>
-                        <line x1="165" y1="125" x2="172" y2="116" stroke="#D4A843" stroke-width="2.5" stroke-linecap="round"/>
-                        <!-- كلمة NUSC -->
-                        <text x="150" y="182" text-anchor="middle" class="svg-center-nusc">NUSC</text>
-                    </g>
-                </svg>
+                <!-- صورة الشعار الرسمي الأصلي بكل تفاصيله الدقيقة -->
+                <div class="official-emblem-wrapper">
+                    <img src="nusc-logo.png" alt="NUSC Emblem" class="official-emblem-img">
+                </div>
             </div>
 
+            <!-- كلمة NUSC تحت الشعار -->
             <div class="university-name" dir="ltr">
                 <span class="letter" style="--delay: 0">N</span>
                 <span class="letter" style="--delay: 1">U</span>
