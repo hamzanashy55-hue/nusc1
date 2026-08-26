@@ -349,3 +349,85 @@
     0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
     100% { transform: translate(-50%, -50%) scale(1.3, 1.6); opacity: 0; }
 }
+/* ==================== RESPONSIVE ADJUSTMENTS ==================== */
+
+/* للشاشات المتوسطة والتابلت (أقل من 768px) */
+@media (max-width: 768px) {
+    .vector-logo-container {
+        width: 170px;
+        height: 170px;
+        margin-bottom: 15px;
+    }
+
+    .nusc-interactive-svg {
+        width: 170px;
+        height: 170px;
+    }
+
+    .university-name {
+        font-size: 2.3rem;
+        letter-spacing: 10px;
+    }
+
+    .university-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .loading-bar {
+        width: 170px;
+        height: 3px;
+    }
+
+    /* ضبط موضع زر الباب لشاشات الموبايل الرأسية */
+    .door-hotspot {
+        top: 70%;
+    }
+
+    .hotspot-badge {
+        font-size: 0.85rem;
+        padding: 8px 16px;
+    }
+
+    .campus-bg {
+        background-position: center 40%;
+    }
+}
+
+/* للموبايلات الصغيرة (أقل من 480px) */
+@media (max-width: 480px) {
+    .vector-logo-container {
+        width: 140px;
+        height: 140px;
+        margin-bottom: 12px;
+    }
+
+    .nusc-interactive-svg {
+        width: 140px;
+        height: 140px;
+    }
+
+    .university-name {
+        font-size: 1.8rem;
+        letter-spacing: 7px;
+    }
+
+    .university-subtitle {
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+    }
+
+    .loading-bar {
+        width: 140px;
+        margin-top: 15px;
+    }
+
+    .hotspot-badge {
+        font-size: 0.78rem;
+        padding: 7px 14px;
+        gap: 6px;
+    }
+
+    .door-hotspot {
+        top: 68%;
+    }
+}
