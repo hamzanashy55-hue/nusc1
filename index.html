@@ -18,85 +18,20 @@
     <div id="splash-screen" class="splash-screen">
         <div class="particles" id="particles"></div>
         <div class="splash-content">
-            <div class="vector-logo-container">
-                <svg class="nusc-interactive-svg" viewBox="0 0 400 400" width="220" height="220">
-                    <defs>
-                        <!-- مسار النص الإنجليزي -->
-                        <path id="path-en" d="M 55,200 A 145,145 0 1,1 345,200" fill="none"/>
-                        <!-- مسار النص العربي معكوس للاتجاه الصحيح -->
-                        <path id="path-ar" d="M 55,200 A 145,145 0 0,0 345,200" fill="none"/>
-                        <linearGradient id="gold-stroke" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#F9E498" />
-                            <stop offset="50%" stop-color="#D4A843" />
-                            <stop offset="100%" stop-color="#8E6314" />
-                        </linearGradient>
-                    </defs>
+            <div class="master-emblem-stage">
+                <!-- دوائر الدوران الخارجية والنبض -->
+                <div class="fx-ring fx-ring-outer"></div>
+                <div class="fx-ring fx-ring-dashed"></div>
+                <div class="fx-glow-pulse"></div>
 
-                    <!-- الخلفية الدائرية البيضاء تظهر بتأثير التلاشي -->
-                    <circle class="anim-bg-circle" cx="200" cy="200" r="160" fill="#FFFFFF"/>
-
-                    <!-- الإطارات الدائرية الخارجية المرسومة -->
-                    <circle class="anim-ring outer-ring" cx="200" cy="200" r="185"/>
-                    <circle class="anim-ring main-gold-border" cx="200" cy="200" r="160" stroke="url(#gold-stroke)" stroke-width="6"/>
-                    <circle class="anim-ring inner-gold-border" cx="200" cy="200" r="120" stroke="#D4A843" stroke-width="2" stroke-dasharray="6 6"/>
-
-                    <!-- النص الإنجليزي العلوي -->
-                    <text class="anim-text text-en">
-                        <textPath href="#path-en" startOffset="50%" text-anchor="middle">
-                            NATIONAL UNIVERSITY OF SADAT CITY
-                        </textPath>
-                    </text>
-
-                    <!-- النص العربي السفلي -->
-                    <text class="anim-text text-ar">
-                        <textPath href="#path-ar" startOffset="50%" text-anchor="middle">
-                            جامعة مدينة السادات الأهلية
-                        </textPath>
-                    </text>
-
-                    <!-- إكليل الزيتون الفضي (الجانب الأيسر) -->
-                    <g class="anim-wreath wreath-left">
-                        <path d="M 125,140 C 110,170 115,220 145,245" fill="none" stroke="#A0A5AA" stroke-width="2.5" stroke-linecap="round"/>
-                        <ellipse cx="118" cy="155" rx="6" ry="11" transform="rotate(-30 118 155)" fill="#B5BAC0"/>
-                        <ellipse cx="112" cy="178" rx="6" ry="11" transform="rotate(-15 112 178)" fill="#8A9096"/>
-                        <ellipse cx="116" cy="202" rx="6" ry="11" transform="rotate(10 116 202)" fill="#B5BAC0"/>
-                        <ellipse cx="128" cy="224" rx="6" ry="11" transform="rotate(35 128 224)" fill="#8A9096"/>
-                    </g>
-
-                    <!-- إكليل الزيتون الفضي (الجانب الأيمن) -->
-                    <g class="anim-wreath wreath-right">
-                        <path d="M 275,140 C 290,170 285,220 255,245" fill="none" stroke="#A0A5AA" stroke-width="2.5" stroke-linecap="round"/>
-                        <ellipse cx="282" cy="155" rx="6" ry="11" transform="rotate(30 282 155)" fill="#B5BAC0"/>
-                        <ellipse cx="288" cy="178" rx="6" ry="11" transform="rotate(15 288 178)" fill="#8A9096"/>
-                        <ellipse cx="284" cy="202" rx="6" ry="11" transform="rotate(-10 284 202)" fill="#B5BAC0"/>
-                        <ellipse cx="272" cy="224" rx="6" ry="11" transform="rotate(-35 272 224)" fill="#8A9096"/>
-                    </g>
-
-                    <!-- أشعة الشمس المتوهجة -->
-                    <g class="anim-sunburst">
-                        <line x1="200" y1="160" x2="200" y2="130" stroke="#D4A843" stroke-width="3" stroke-linecap="round"/>
-                        <line x1="185" y1="165" x2="168" y2="140" stroke="#D4A843" stroke-width="2.5" stroke-linecap="round"/>
-                        <line x1="215" y1="165" x2="232" y2="140" stroke="#D4A843" stroke-width="2.5" stroke-linecap="round"/>
-                        <line x1="172" y1="175" x2="148" y2="158" stroke="#D4A843" stroke-width="2" stroke-linecap="round"/>
-                        <line x1="228" y1="175" x2="252" y2="158" stroke="#D4A843" stroke-width="2" stroke-linecap="round"/>
-                    </g>
-
-                    <!-- الكتاب الذهبي والتفاصيل الرقمية في القلب -->
-                    <g class="anim-core-book">
-                        <path d="M 165,175 C 180,170 195,176 200,180 C 205,176 220,170 235,175 L 235,218 C 220,213 205,218 200,222 C 195,218 180,213 165,218 Z" fill="url(#gold-stroke)"/>
-                        <path d="M 200,180 L 200,222" stroke="#FFFFFF" stroke-width="2.5"/>
-                        <!-- مربعات التكنولوجيا المتطايرة -->
-                        <rect x="150" y="172" width="6" height="6" fill="#D4A843"/>
-                        <rect x="158" y="165" width="5" height="5" fill="#D4A843"/>
-                        <rect x="244" y="172" width="6" height="6" fill="#D4A843"/>
-                        <rect x="237" y="165" width="5" height="5" fill="#D4A843"/>
-                        <!-- كلمة NUSC والدرع الصغير -->
-                        <text x="200" y="242" text-anchor="middle" class="anim-inner-nusc">NUSC</text>
-                    </g>
-                </svg>
+                <!-- إطار الشعار المفرغ بالكامل مع تفاصيله الأصلية -->
+                <div class="official-emblem-holder">
+                    <img src="nusc-logo.png" alt="NUSC Logo" class="official-emblem-render">
+                    <div class="shimmer-fx"></div>
+                </div>
             </div>
 
-            <!-- كلمة NUSC الكبيرة -->
+            <!-- حروف NUSC -->
             <div class="university-name" dir="ltr">
                 <span class="letter" style="--delay: 0">N</span>
                 <span class="letter" style="--delay: 1">U</span>
