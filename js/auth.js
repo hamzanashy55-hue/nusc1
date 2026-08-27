@@ -28,41 +28,39 @@ function switchRole(role) {
 function handleLogin(event) {
     event.preventDefault();
     
-    const email = document.getElementById('login-email').value.trim();
-    const password = document.getElementById('login-password').value;
-    const rememberMe = document.getElementById('remember-me').checked;
-    
-    if (!email || !password) {
-        showToast('يرجى إدخال البريد الإلكتروني وكلمة المرور', 'error');
+    const emailInput = document.getElementById('login-email').value.trim();
+    const passwordInput = document.getElementById('login-password').value.trim();
+    const activeRoleTab = document.querySelector('.role-tab.active');
+    const selectedRole = activeRoleTab ? activeRoleTab.dataset.role : 'student';
+
+    // 1. فحص الحساب التجريبي المباشر
+    if (emailInput === "demo@nusc.edu.eg" && passwordInput === "123") {
+        const demoUser = {
+            fullName: "طالب تجريبي",
+            email: "demo@nusc.edu.eg",
+            role: "student",
+            faculty: "cs",
+            facultyName: "كلية الحاسبات والمعلومات والذكاء الاصطناعي",
+            year: "الفرقة الأولى",
+            specialization: "علوم الحاسب والذكاء الاصطناعي",
+            studentCode: "NUSC-2026-001",
+            universityEmail: "demo.student@nusc.edu.eg"
+        };
+        
+        localStorage.setItem('nusc_current_user', JSON.stringify(demoUser));
+        showToast('تم تسجيل الدخول بنجاح بالحساب التجريبي!', 'success');
+        setTimeout(() => navigateToDashboard(demoUser), 800);
         return;
     }
-    
-    // Validate email format
-    if (!isValidEmail(email)) {
-        showToast('يرجى إدخال بريد إلكتروني صحيح', 'error');
-        return;
-    }
-    
-    // Check stored users
-    const users = JSON.parse(localStorage.getItem('nusc_users') || '[]');
-    const user = users.find(u => u.email === email && u.password === password && u.role === currentLoginRole);
-    
+
+    // 2. فحص باقي المستخدمين المسجلين في النظام
+    const users = JSON.parse(localStorage.getItem('nusc_users')) || [];
+    const user = users.find(u => u.email.toLowerCase() === emailInput.toLowerCase() && u.password === passwordInput);
+
     if (user) {
-        // Save remember me preference
-        if (rememberMe) {
-            localStorage.setItem('nusc_remembered_email', email);
-            localStorage.setItem('nusc_remembered_role', currentLoginRole);
-        } else {
-            localStorage.removeItem('nusc_remembered_email');
-            localStorage.removeItem('nusc_remembered_role');
-        }
-        
-        // Save current session
         localStorage.setItem('nusc_current_user', JSON.stringify(user));
-        
-        showToast(`مرحباً ${user.fullName}! تم تسجيل الدخول بنجاح`, 'success');
-        
-       setTimeout(() => navigateToDashboard(user), 1200);
+        showToast('تم تسجيل الدخول بنجاح!', 'success');
+        setTimeout(() => navigateToDashboard(user), 800);
     } else {
         showToast('البريد الإلكتروني أو كلمة المرور غير صحيحة', 'error');
     }
