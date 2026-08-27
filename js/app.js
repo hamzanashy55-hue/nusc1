@@ -150,35 +150,60 @@ function handleMaterialUpload(e) {
 
 // بيانات تجريبية سريعة لكل كلية
 const facultyMockData = {
+    pharmacy: {
+        name: "كلية الصيدلة",
+        icon: "💊",
+        programs: ["Pharm D (الصيدلة الإكلينيكية)", "Pharm D (فارم دي)"],
+        desc: "برامج الصيدلة الإكلينيكية وفارم دي المعتمدة",
+        subjects: ["كيمياء صيدلية", "علم الأدوية (Pharmacology)", "صيدلة إكلينيكية", "عقاقير وكيمياء حيوية"]
+    },
     cs: {
         name: "كلية الحاسبات والمعلومات والذكاء الاصطناعي",
         icon: "💻",
-        desc: "قسم علوم الحاسب، نظم المعلومات، والذكاء الاصطناعي",
-        subjects: ["تراكيب بيانات وخوارزميات", "مقدمة في الذكاء الاصطناعي", "هندسة البرمجيات", "قواعد بيانات متقدمة"]
-    },
-    pharmacy: {
-        name: "كلية الصيدلة الإكلينيكية",
-        icon: "💊",
-        desc: "قسم الكيمياء الدوائية، العقاقير، والصيدلانيات",
-        subjects: ["كيمياء حيوية", "علم الأدوية (Pharmacology)", "صيدلة إكلينيكية", "تشريح وعلم وظائف الأعضاء"]
-    },
-    science: {
-        name: "كلية العلوم",
-        icon: "🔬",
-        desc: "أقسام الكيمياء، الفيزياء، والرياضيات الحيوية",
-        subjects: ["كيمياء عضوية", "تفاضل وتكامل", "فيزياء عامة 1", "علم النبات والخلية"]
+        programs: ["الذكاء الاصطناعي والبيانات الضخمة", "الشبكات والحوسبة السحابية"],
+        desc: "برامج الذكاء الاصطناعي والبيانات الضخمة والحوسبة السحابية",
+        subjects: ["خوارزميات وذكاء اصطناعي", "معالجة البيانات الضخمة", "حوسبة سحابية وشبكات", "قواعد بيانات وأمن سيبراني"]
     },
     vet: {
         name: "كلية الطب البيطري",
         icon: "🐾",
-        desc: "التشريح البيطري، الرقابة الصحية، والطب الوقائي",
-        subjects: ["تشريح بيطري", "علم الأنسجة (Histology)", "بكتيريا ومناعة بيطرية", "صحة الحيوان"]
+        programs: ["الطب البيطري", "الطب البيطري تميز صحة وسلامة الغذاء"],
+        desc: "الطب البيطري العام وبرنامج تميز صحة وسلامة الغذاء",
+        subjects: ["تشريح وأنسجة بيطرية", "صحة وسلامة الغذاء", "بكتيريا وفيروسات", "طب ورعاية الحيوان"]
+    },
+    science: {
+        name: "كلية العلوم",
+        icon: "🔬",
+        programs: ["الكيمياء الصناعية التطبيقية", "علوم البيانات وتطبيقات الذكاء الاصطناعي"],
+        desc: "الكيمياء الصناعية التطبيقية وعلوم البيانات والذكاء الاصطناعي",
+        subjects: ["كيمياء صناعية وتطبيقية", "تحليل واستخراج البيانات", "رياضيات وإحصاء متقدم", "فيزياء حديثة"]
     },
     business: {
-        name: "كلية إدارة الأعمال وتكنولوجيا المعلومات",
+        name: "كلية الأعمال",
         icon: "📊",
-        desc: "إدارة المؤسسات، ريادة الأعمال، والأنظمة المالية الرقمية",
-        subjects: ["مبادئ الإدارة الحديثة", "محاسبة مالية", "التسويق الرقمي", "اقتصاد كلي"]
+        programs: ["نظم معلومات الأعمال (BIS)", "المحاسبة الرقمية", "التسويق الرقمي"],
+        desc: "برامج نظم معلومات الأعمال، المحاسبة الرقمية، والتسويق الرقمي",
+        subjects: ["نظم معلومات الأعمال BIS", "محاسبة رقمية وإلكترونية", "استراتيجيات التسويق الرقمي", "إدارة مؤسسات وتمويل"]
+    },
+    tourism: {
+        name: "كلية السياحة والفنادق",
+        icon: "🏨",
+        programs: ["إدارة الطيران", "الإدارة الدولية لعمليات الفنادق والمطاعم"],
+        desc: "برامج إدارة الطيران والإدارة الدولية للفنادق والمطاعم",
+        subjects: ["إدارة وحجز الطيران", "تشغيل وإدارة الفنادق الدولية", "إدارة خدمات الضيافة والمطاعم", "تسويق سياحي دولي"]
+    },
+    sports: {
+        name: "كلية علوم الرياضة",
+        icon: "🏅",
+        programs: [
+            "تخطيط الأحمال التدريبية",
+            "الاستشفاء والتأهيل البدني والحركي",
+            "إدارة الأعمال الرياضية",
+            "تحليل البيانات الرياضية",
+            "الترويح وأنشطة جودة الحياة"
+        ],
+        desc: "برامج التأهيل البدني، الأحمال التدريبية، وتحليل البيانات الرياضية",
+        subjects: ["فسيولوجيا الجهد البدني", "تخطيط الأحمال الرياضية", "التأهيل الحركي والاستشفاء", "تحليل الأداء والبيانات الرياضية"]
     }
 };
 
@@ -187,25 +212,24 @@ function previewFaculty(facultyKey) {
     const data = facultyMockData[facultyKey];
     if (!data) return;
 
-    // تحديث الهيدر والبانر
     document.getElementById('header-faculty-name').textContent = data.name;
     document.getElementById('header-faculty-icon').textContent = data.icon;
     document.getElementById('faculty-hero-title').textContent = data.name;
     document.getElementById('faculty-hero-icon').textContent = data.icon;
     document.getElementById('faculty-hero-desc').textContent = data.desc;
 
-    // تحديث شبكة المواد فوراً
+    // عرض المواد والبرامج التابعة للكلية
     const grid = document.getElementById('faculty-subjects-grid');
     if (grid) {
         grid.innerHTML = data.subjects.map(sub => `
             <div class="subject-card">
-                <i class="fas fa-book-reader" style="font-size: 1.5rem; color: var(--primary-gold); margin-bottom: 8px; display:block;"></i>
+                <i class="fas fa-graduation-cap" style="font-size: 1.5rem; color: var(--primary-gold); margin-bottom: 8px; display:block;"></i>
                 ${sub}
             </div>
         `).join('');
     }
 
-    // إظهار لوحة التحكم والتبويب الرئيسي
+    // إظهار اللوحة والتبويب الرئيسي
     document.getElementById('splash-screen').classList.add('hidden');
     document.getElementById('campus-screen').classList.add('hidden');
     document.getElementById('login-page').classList.add('hidden');
