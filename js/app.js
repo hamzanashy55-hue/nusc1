@@ -207,7 +207,36 @@ const facultyMockData = {
     }
 };
 
-// دالة التبديل السريع للكلية
+// تبديل المود (أبيض ودهبي / أسود ودهبي)
+function toggleThemeMode() {
+    const isLight = document.body.classList.toggle('light-theme');
+    const icon = document.getElementById('theme-icon');
+    if (isLight) {
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+        localStorage.setItem('nusc_theme', 'light');
+    } else {
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+        localStorage.setItem('nusc_theme', 'dark');
+    }
+}
+
+// استرجاع الثيم المفضل عند الفتح
+(function initTheme() {
+    if (localStorage.getItem('nusc_theme') === 'light') {
+        document.body.classList.add('light-theme');
+        setTimeout(() => {
+            const icon = document.getElementById('theme-icon');
+            if (icon) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+        }, 100);
+    }
+})();
+
+// تحديث دالة previewFaculty لعرض برامج وثيم الكلية
 function previewFaculty(facultyKey) {
     const data = facultyMockData[facultyKey];
     if (!data) return;
@@ -218,18 +247,26 @@ function previewFaculty(facultyKey) {
     document.getElementById('faculty-hero-icon').textContent = data.icon;
     document.getElementById('faculty-hero-desc').textContent = data.desc;
 
-    // عرض المواد والبرامج التابعة للكلية
+    // تحديث التخصصات
+    const chipsContainer = document.getElementById('faculty-programs-chips');
+    if (chipsContainer && data.programs) {
+        chipsContainer.innerHTML = data.programs.map(prog => `
+            <span class="program-chip"><i class="fas fa-check-circle"></i> ${prog}</span>
+        `).join('');
+    }
+
+    // تحديث المواد
     const grid = document.getElementById('faculty-subjects-grid');
     if (grid) {
         grid.innerHTML = data.subjects.map(sub => `
             <div class="subject-card">
-                <i class="fas fa-graduation-cap" style="font-size: 1.5rem; color: var(--primary-gold); margin-bottom: 8px; display:block;"></i>
+                <i class="fas fa-cube" style="font-size: 1.6rem; color: var(--primary-gold); margin-bottom: 10px; display:block;"></i>
                 ${sub}
             </div>
         `).join('');
     }
 
-    // إظهار اللوحة والتبويب الرئيسي
+    // إظهار اللوحة
     document.getElementById('splash-screen').classList.add('hidden');
     document.getElementById('campus-screen').classList.add('hidden');
     document.getElementById('login-page').classList.add('hidden');

@@ -403,3 +403,233 @@
     color: #000;
     font-weight: 700;
 }
+/* ==================== THEME VARIABLES ==================== */
+:root {
+    --bg-main: #0B0F19;
+    --bg-card: rgba(22, 33, 62, 0.75);
+    --bg-header: rgba(15, 23, 42, 0.95);
+    --text-main: #FFFFFF;
+    --text-muted: #ADB5BD;
+    --border-color: rgba(212, 168, 67, 0.25);
+    --gold-glow: rgba(212, 168, 67, 0.4);
+}
+
+/* المود الفاتح (أبيض ودهبي فخم) */
+body.light-theme {
+    --bg-main: #F8F9FA;
+    --bg-card: rgba(255, 255, 255, 0.9);
+    --bg-header: rgba(255, 255, 255, 0.95);
+    --text-main: #1A1A2E;
+    --text-muted: #6C757D;
+    --border-color: rgba(212, 168, 67, 0.35);
+    --gold-glow: rgba(212, 168, 67, 0.25);
+}
+
+.app-dashboard {
+    background: var(--bg-main);
+    color: var(--text-main);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.app-header {
+    background: var(--bg-header);
+    border-color: var(--border-color);
+}
+
+.theme-toggle-btn {
+    background: rgba(212, 168, 67, 0.15);
+    border: 1px solid var(--border-color);
+    color: var(--primary-gold);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    margin-left: 8px;
+}
+
+.theme-toggle-btn:hover {
+    transform: rotate(20deg) scale(1.1);
+    background: var(--primary-gold);
+    color: #000;
+}
+
+/* ==================== CS FACULTY HERO & ANIMATIONS ==================== */
+.faculty-hero-banner {
+    position: relative;
+    padding: 50px 20px 40px;
+    overflow: hidden;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* خلفية حاسبات وأنيميشن السايبر والـ Grid */
+.faculty-cs-theme {
+    background: radial-gradient(circle at 50% 30%, rgba(212, 168, 67, 0.15), transparent 70%),
+                linear-gradient(180deg, rgba(10, 15, 29, 0.95), var(--bg-main));
+}
+
+body.light-theme .faculty-cs-theme {
+    background: radial-gradient(circle at 50% 30%, rgba(212, 168, 67, 0.18), transparent 70%),
+                linear-gradient(180deg, #FFFFFF, var(--bg-main));
+}
+
+.faculty-anim-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* شبكة السايبر المتحركة */
+.cyber-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(to right, rgba(212, 168, 67, 0.08) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(212, 168, 67, 0.08) 1px, transparent 1px);
+    background-size: 30px 30px;
+    animation: gridMove 20s linear infinite;
+    opacity: 0.7;
+}
+
+@keyframes gridMove {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(30px); }
+}
+
+/* تدفق الشفرات الثنائية */
+.matrix-code-stream {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-family: monospace;
+    font-size: 0.75rem;
+    color: rgba(212, 168, 67, 0.35);
+    animation: textFlicker 4s infinite;
+}
+
+@keyframes textFlicker {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.7; }
+}
+
+/* عقد الدوائر الإلكترونية المتوهجة */
+.circuit-nodes .node {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primary-gold);
+    box-shadow: 0 0 10px var(--primary-gold);
+    animation: pulseNode 2.5s infinite;
+}
+
+.node.n1 { top: 30%; right: 15%; animation-delay: 0.2s; }
+.node.n2 { top: 65%; left: 10%; animation-delay: 1.1s; }
+.node.n3 { top: 20%; left: 25%; animation-delay: 1.8s; }
+
+@keyframes pulseNode {
+    0%, 100% { transform: scale(1); opacity: 0.4; }
+    50% { transform: scale(1.6); opacity: 1; box-shadow: 0 0 16px #FFF; }
+}
+
+/* المحتوى والشارات */
+.faculty-hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faculty-badge-glow {
+    width: 75px;
+    height: 75px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    background: rgba(212, 168, 67, 0.12);
+    border: 2px solid var(--primary-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 25px var(--gold-glow);
+    animation: badgeFloat 4s ease-in-out infinite;
+}
+
+@keyframes badgeFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+.faculty-big-icon {
+    font-size: 2.2rem;
+}
+
+.faculty-hero-content h1 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--text-main);
+    margin-bottom: 8px;
+}
+
+.faculty-hero-content p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 18px;
+}
+
+/* شرائح البرامج والتخصصات */
+.programs-chips-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.program-chip {
+    background: rgba(212, 168, 67, 0.1);
+    border: 1px solid var(--border-color);
+    color: var(--primary-gold);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    backdrop-filter: blur(6px);
+}
+
+/* الكروت والمقررات */
+.subject-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 22px 15px;
+    text-align: center;
+    font-weight: 700;
+    color: var(--text-main);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.subject-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-gold);
+    box-shadow: 0 12px 30px var(--gold-glow);
+}

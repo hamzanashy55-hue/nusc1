@@ -421,15 +421,15 @@
 <div id="app-dashboard" class="app-dashboard hidden">
     <!-- Top Navigation Bar -->
     <header class="app-header">
-        <div class="header-right">
-            <button class="menu-btn" onclick="toggleSidebar()">
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="faculty-badge-header" id="current-faculty-badge">
-                <span class="faculty-icon" id="header-faculty-icon">🏛️</span>
-                <span class="faculty-title" id="header-faculty-name">الكلية</span>
+        <div class="header-left">
+                <!-- زر تبديل المود (أسود ودهبي / أبيض ودهبي) -->
+                <button class="theme-toggle-btn" onclick="toggleThemeMode()" title="تبديل المظهر">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
+                <div class="header-user-avatar" onclick="switchDashboardTab('profile')">
+                    <img src="nusc-logo.png" alt="Profile" id="header-avatar-img">
+                </div>
             </div>
-        </div>
         <div class="header-left">
             <div class="header-user-avatar" onclick="switchDashboardTab('profile')">
                 <img src="nusc-logo.png" alt="Profile" id="header-avatar-img">
@@ -470,22 +470,49 @@
 
     <!-- Main Content Views (Tabs) -->
     <main class="dashboard-main" id="dashboard-main">
-        <!-- 1. Home / Faculty Dynamic View -->
-        <section id="tab-home" class="tab-view active">
-            <div class="faculty-hero-banner" id="faculty-banner">
-                <div class="faculty-theme-overlay" id="faculty-theme-overlay"></div>
-                <div class="faculty-hero-content">
-                    <span class="faculty-big-icon" id="faculty-hero-icon">💻</span>
-                    <h1 id="faculty-hero-title">كلية الحاسبات والمعلومات والذكاء الاصطناعي</h1>
-                    <p id="faculty-hero-desc">المقر الأكاديمي الرقمي وإدارة المحاضرات</p>
-                </div>
-            </div>
+       <!-- 1. Home / Faculty Dynamic Themed View -->
+            <section id="tab-home" class="tab-view active">
+                <div class="faculty-hero-banner faculty-cs-theme" id="faculty-banner">
+                    <!-- طبقة الأنيميشن الحي للكلية (مصفوفات ودوائر إلكترونية لحاسبات) -->
+                    <div class="faculty-anim-bg" id="faculty-anim-bg">
+                        <div class="cyber-grid"></div>
+                        <div class="matrix-code-stream">
+                            <span>01010100 01100101 01100011 01101000</span>
+                            <span>10101101 00101110 01000001 01001001</span>
+                            <span>01000011 01010011 00101101 01000001 01001001</span>
+                        </div>
+                        <div class="circuit-nodes">
+                            <span class="node n1"></span>
+                            <span class="node n2"></span>
+                            <span class="node n3"></span>
+                        </div>
+                    </div>
 
-            <div class="dashboard-section">
-                <h3><i class="fas fa-layer-group"></i> المواد المتاحة لفرقتك</h3>
-                <div class="subjects-grid" id="faculty-subjects-grid"></div>
-            </div>
-        </section>
+                    <div class="faculty-hero-content">
+                        <div class="faculty-badge-glow">
+                            <span class="faculty-big-icon" id="faculty-hero-icon">💻</span>
+                        </div>
+                        <h1 id="faculty-hero-title">كلية الحاسبات والمعلومات والذكاء الاصطناعي</h1>
+                        <p id="faculty-hero-desc">برامج الذكاء الاصطناعي، الحوسبة السحابية، والبيانات الضخمة</p>
+                        
+                        <div class="programs-chips-container" id="faculty-programs-chips">
+                            <!-- التخصصات المعتمدة -->
+                            <span class="program-chip"><i class="fas fa-microchip"></i> الذكاء الاصطناعي والبيانات الضخمة</span>
+                            <span class="program-chip"><i class="fas fa-cloud"></i> الشبكات والحوسبة السحابية</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-section">
+                    <div class="section-title-box">
+                        <h3><i class="fas fa-cubes"></i> المقررات والمسارات الأكاديمية</h3>
+                        <span class="badge-gold">تفاعلي</span>
+                    </div>
+                    <div class="subjects-grid" id="faculty-subjects-grid">
+                        <!-- تملأ بالمواد -->
+                    </div>
+                </div>
+            </section>
 
         <!-- 2. Courses & Upload Center -->
         <section id="tab-courses" class="tab-view hidden">
