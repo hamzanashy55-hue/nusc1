@@ -475,3 +475,44 @@
         font-size: 0.95rem;
     }
 }
+/* ==================== ADMIN SECRET MODAL ==================== */
+.admin-modal-content {
+    border: 1px solid rgba(212, 168, 67, 0.4);
+    box-shadow: 0 0 35px rgba(212, 168, 67, 0.25), 0 20px 40px rgba(0, 0, 0, 0.8);
+    background: linear-gradient(145deg, #111827, #0B0F19);
+}
+
+.admin-modal-badge {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-gold), #9A7020);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    font-size: 1.6rem;
+    color: #000;
+    box-shadow: 0 0 20px rgba(212, 168, 67, 0.4);
+}
+
+.admin-modal-badge.recovery-badge {
+    background: linear-gradient(135deg, #E67E22, #D35400);
+    color: #FFF;
+}
+
+.admin-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px 0 15px;
+}
+
+.admin-modal-footer a {
+    font-size: 0.85rem;
+    color: var(--primary-gold);
+}
+
+.btn-admin-submit {
+    background: linear-gradient(135deg, var(--primary-gold), #B8922E);
+    margin-top: 5px;
+}

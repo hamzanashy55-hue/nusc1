@@ -143,3 +143,103 @@ function loadRememberedCredentials() {
         }
     }
 }
+/* ==================== ADMIN SECRET ACCESS & LOGIC ==================== */
+
+// المفتاح الرئيسي لاسترداد الحساب في حال نسيان الباسورد
+const MASTER_RECOVERY_KEY = "NUSC@2026#ADMIN";
+
+// تهيئة بيانات الأدمن الافتراضية
+function initAdminAccount() {
+    if (!localStorage.getItem('nusc_admin_credentials')) {
+        const defaultAdmin = {
+            email: "admin@nusc.edu.eg",
+            password: "Admin#NUSC@2026"
+        };
+        localStorage.setItem('nusc_admin_credentials', JSON.stringify(defaultAdmin));
+    }
+}
+initAdminAccount();
+
+// كشف الضغطات المتتالية على اللوجو لفتح بوابة الأدمن (3 ضغطات سريعة)
+let logoClickCount = 0;
+let logoClickTimer = null;
+
+function handleAdminSecretTrigger() {
+    logoClickCount++;
+    clearTimeout(logoClickTimer);
+
+    if (logoClickCount === 3) {
+        logoClickCount = 0;
+        showAdminLoginModal();
+    } else {
+        logoClickTimer = setTimeout(() => {
+            logoClickCount = 0;
+        }, 1200);
+    }
+}
+
+function showAdminLoginModal() {
+    document.getElementById('admin-login-modal').classList.remove('hidden');
+}
+
+function closeAdminModal() {
+    document.getElementById('admin-login-modal').classList.add('hidden');
+}
+
+function showAdminForgotModal() {
+    closeAdminModal();
+    document.getElementById('admin-forgot-modal').classList.remove('hidden');
+}
+
+function closeAdminForgotModal() {
+    document.getElementById('admin-forgot-modal').classList.add('hidden');
+}
+
+// معالجة تسجيل دخول الأدمن
+function handleAdminLogin(event) {
+    event.preventDefault();
+    const email = document.getElementById('admin-email').value.trim();
+    const password = document.getElementById('admin-password').value;
+
+    const admin = JSON.parse(localStorage.getItem('nusc_admin_credentials'));
+
+    if (email === admin.email && password === admin.password) {
+        showToast('مرحباً بك يا سيادة المسؤول! جاري الدخول للوحة التحكم...', 'success');
+        closeAdminModal();
+        
+        // حفظ جلسة الأدمن
+        localStorage.setItem('nusc_current_user', JSON.stringify({ role: 'admin', fullName: 'المسؤول العام' }));
+        
+        // الانتقال للوحة التحكم المنظمة حسب الكليات (سيتم ربطها بواجهة الأدمن)
+        console.log("Logged in as Admin. Access to faculties granted.");
+    } else {
+        showToast('بيانات المسؤول غير صحيحة!', 'error');
+    }
+}
+
+// استعادة وتغيير كلمة مرور الأدمن عبر الماستر كي
+function handleAdminPasswordReset(event) {
+    event.preventDefault();
+    const key = document.getElementById('admin-recovery-key').value.trim();
+    const newPass = document.getElementById('admin-new-password').value;
+
+    if (key !== MASTER_RECOVERY_KEY) {
+        showToast('مفتاح الاسترداد الرئيسي غير صحيح!', 'error');
+        return;
+    }
+
+    if (newPass.length < 8) {
+        showToast('كلمة المرور يجب ألا تقل عن 8 أحرف', 'error');
+        return;
+    }
+
+    const admin = JSON.parse(localStorage.getItem('nusc_admin_credentials'));
+    admin.password = newPass;
+    localStorage.setItem('nusc_admin_credentials', JSON.stringify(admin));
+
+    showToast('تم تحديث كلمة مرور المسؤول بنجاح!', 'success');
+    setTimeout(() => {
+        closeAdminForgotModal();
+        showAdminLoginModal();
+    }, 1200);
+}

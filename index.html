@@ -133,8 +133,7 @@
         </div>
         <div class="login-container">
             <div class="login-header">
-                <img src="nusc-logo.png" alt="NUSC" class="login-logo">
-                <h1>المنصة الرسمية</h1>
+<img src="nusc-logo.png" alt="NUSC" class="login-logo" onclick="handleAdminSecretTrigger()" title="NUSC Portal">                <h1>المنصة الرسمية</h1>
                 <p>مرحباً بك في منصة NUSC</p>
             </div>
 
@@ -455,5 +454,78 @@
     <script src="js/register.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/app.js"></script>
+    <!-- Admin Secret Login Modal -->
+    <div id="admin-login-modal" class="modal hidden">
+        <div class="modal-overlay" onclick="closeAdminModal()"></div>
+        <div class="modal-content admin-modal-content">
+            <button class="modal-close" onclick="closeAdminModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="admin-modal-badge">
+                <i class="fas fa-user-shield"></i>
+            </div>
+            <h2>بوابة المسؤول (Admin Portal)</h2>
+            <p>لوحة التحكم المركزية لجامعة NUSC</p>
+
+            <form id="admin-login-form" onsubmit="handleAdminLogin(event)">
+                <div class="input-group">
+                    <div class="input-wrapper">
+                        <i class="fas fa-shield-alt"></i>
+                        <input type="email" id="admin-email" placeholder="بريد المسؤول" required>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="input-wrapper">
+                        <i class="fas fa-key"></i>
+                        <input type="password" id="admin-password" placeholder="رمز المرور للمسؤول" required>
+                    </div>
+                </div>
+
+                <div class="admin-modal-footer">
+                    <a href="#" onclick="showAdminForgotModal()">نسيت رمز المسؤول؟</a>
+                </div>
+
+                <button type="submit" class="btn-login btn-admin-submit">
+                    <span>دخول لوحة التحكم</span>
+                    <i class="fas fa-unlock-alt"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Recovery Modal -->
+    <div id="admin-forgot-modal" class="modal hidden">
+        <div class="modal-overlay" onclick="closeAdminForgotModal()"></div>
+        <div class="modal-content admin-modal-content">
+            <button class="modal-close" onclick="closeAdminForgotModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="admin-modal-badge recovery-badge">
+                <i class="fas fa-key"></i>
+            </div>
+            <h2>استعادة حساب المسؤول</h2>
+            <p>أدخل مفتاح الاسترداد الرئيسي (Master Recovery Key) لتعيين كلمة مرور جديدة</p>
+
+            <form onsubmit="handleAdminPasswordReset(event)">
+                <div class="input-group">
+                    <div class="input-wrapper">
+                        <i class="fas fa-fingerprint"></i>
+                        <input type="password" id="admin-recovery-key" placeholder="المفتاح السري (Master Key)" required>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="admin-new-password" placeholder="كلمة المرور الجديدة" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-login btn-admin-submit">
+                    <span>تحديث كلمة المرور</span>
+                    <i class="fas fa-check"></i>
+                </button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
