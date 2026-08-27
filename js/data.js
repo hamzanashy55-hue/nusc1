@@ -212,3 +212,26 @@ function getFacultySpecializations(facultyKey) {
 function getFacultySubjects(facultyKey) {
     return FACULTIES_DATA[facultyKey]?.subjects || [];
 }
+
+// تهيئة مستخدم تجريبي تلقائياً في الـ localStorage
+(function initDemoAccount() {
+    const defaultDemoUser = {
+        fullName: "طالب تجريبي",
+        email: "demo@nusc.edu.eg",
+        password: "123",
+        role: "student",
+        faculty: "cs",
+        facultyName: "كلية الحاسبات والمعلومات والذكاء الاصطناعي",
+        year: "الفرقة الأولى",
+        specialization: "علوم الحاسب والذكاء الاصطناعي",
+        studentCode: "NUSC-2026-001",
+        universityEmail: "demo.student@nusc.edu.eg"
+    };
+
+    let users = JSON.parse(localStorage.getItem('nusc_users')) || [];
+    const exists = users.some(u => u.email === defaultDemoUser.email);
+    if (!exists) {
+        users.push(defaultDemoUser);
+        localStorage.setItem('nusc_users', JSON.stringify(users));
+    }
+})();
