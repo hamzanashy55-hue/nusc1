@@ -62,8 +62,7 @@ function handleLogin(event) {
         
         showToast(`مرحباً ${user.fullName}! تم تسجيل الدخول بنجاح`, 'success');
         
-        // TODO: Navigate to dashboard
-        // setTimeout(() => navigateToDashboard(user), 1500);
+       setTimeout(() => navigateToDashboard(user), 1200);
     } else {
         showToast('البريد الإلكتروني أو كلمة المرور غير صحيحة', 'error');
     }
@@ -242,4 +241,37 @@ function handleAdminPasswordReset(event) {
         closeAdminForgotModal();
         showAdminLoginModal();
     }, 1200);
+}
+function navigateToDashboard(user) {
+    document.getElementById('login-page').classList.add('hidden');
+    document.getElementById('app-dashboard').classList.remove('hidden');
+
+    if (user.role === 'student') {
+        document.getElementById('header-faculty-name').textContent = user.facultyName || 'حاسبات وذكاء اصطناعي';
+        document.getElementById('faculty-hero-title').textContent = user.facultyName || 'كلية الحاسبات والذكاء الاصطناعي';
+        document.getElementById('profile-name').textContent = user.fullName;
+        document.getElementById('profile-email').textContent = user.email;
+        document.getElementById('profile-uni-email').textContent = user.universityEmail || 'لم يُحدد';
+        document.getElementById('profile-code').textContent = user.studentCode;
+        document.getElementById('profile-faculty').textContent = user.facultyName;
+        document.getElementById('profile-year').textContent = user.year;
+        document.getElementById('profile-spec').textContent = user.specialization;
+
+        // تحميل مواد الكلية ديناميكياً
+        const subjectsContainer = document.getElementById('faculty-subjects-grid');
+        if (subjectsContainer && typeof getFacultySubjects === 'function') {
+            const subjects = getFacultySubjects(user.faculty);
+            subjectsContainer.innerHTML = subjects.map(sub => `
+                <div class="subject-card">
+                    <i class="fas fa-book-reader" style="font-size: 1.5rem; color: var(--primary-gold); margin-bottom: 8px; display:block;"></i>
+                    ${sub}
+                </div>
+            `).join('');
+        }
+    }
+}
+
+function handleLogout() {
+    localStorage.removeItem('nusc_current_user');
+    location.reload();
 }

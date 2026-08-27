@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+    <link rel="stylesheet" href="css/dashboard.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NUSC</title>
@@ -416,7 +417,211 @@
             </form>
         </div>
     </div>
+<!-- Main App Dashboard -->
+<div id="app-dashboard" class="app-dashboard hidden">
+    <!-- Top Navigation Bar -->
+    <header class="app-header">
+        <div class="header-right">
+            <button class="menu-btn" onclick="toggleSidebar()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="faculty-badge-header" id="current-faculty-badge">
+                <span class="faculty-icon" id="header-faculty-icon">🏛️</span>
+                <span class="faculty-title" id="header-faculty-name">الكلية</span>
+            </div>
+        </div>
+        <div class="header-left">
+            <div class="header-user-avatar" onclick="switchDashboardTab('profile')">
+                <img src="nusc-logo.png" alt="Profile" id="header-avatar-img">
+            </div>
+        </div>
+    </header>
 
+    <!-- Sidebar Navigation Drawer -->
+    <div id="app-sidebar" class="app-sidebar hidden">
+        <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+        <div class="sidebar-content">
+            <div class="sidebar-header">
+                <img src="nusc-logo.png" alt="NUSC" class="sidebar-logo">
+                <h3>بوابة جامعة NUSC</h3>
+                <p id="sidebar-user-role">طالب</p>
+            </div>
+            <ul class="sidebar-menu">
+                <li onclick="switchDashboardTab('home'); toggleSidebar();"><i class="fas fa-home"></i> الرئيسية والكلية</li>
+                <li onclick="switchDashboardTab('courses'); toggleSidebar();"><i class="fas fa-book-open"></i> المقررات الدراسية</li>
+                <li onclick="switchDashboardTab('ai'); toggleSidebar();"><i class="fas fa-robot"></i> الذكاء الاصطناعي المركزي</li>
+                <li onclick="switchDashboardTab('profile'); toggleSidebar();"><i class="fas fa-id-card"></i> الملف الشخصي الكامل</li>
+                <li class="divider"></li>
+                <li onclick="handleLogout()" class="logout-link"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content Views (Tabs) -->
+    <main class="dashboard-main" id="dashboard-main">
+        <!-- 1. Home / Faculty Dynamic View -->
+        <section id="tab-home" class="tab-view active">
+            <div class="faculty-hero-banner" id="faculty-banner">
+                <div class="faculty-theme-overlay" id="faculty-theme-overlay"></div>
+                <div class="faculty-hero-content">
+                    <span class="faculty-big-icon" id="faculty-hero-icon">💻</span>
+                    <h1 id="faculty-hero-title">كلية الحاسبات والمعلومات والذكاء الاصطناعي</h1>
+                    <p id="faculty-hero-desc">المقر الأكاديمي الرقمي وإدارة المحاضرات</p>
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <h3><i class="fas fa-layer-group"></i> المواد المتاحة لفرقتك</h3>
+                <div class="subjects-grid" id="faculty-subjects-grid"></div>
+            </div>
+        </section>
+
+        <!-- 2. Courses & Upload Center -->
+        <section id="tab-courses" class="tab-view hidden">
+            <div class="section-header-box">
+                <h2><i class="fas fa-cloud-upload-alt"></i> مستودع الكتب والمحاضرات</h2>
+                <p>رفع وتحميل المقررات، الكتب الإلكترونية، وروابط الشروحات المباشرة</p>
+            </div>
+
+            <div class="upload-container-card">
+                <h3>إضافة محتوى دراسي جديد</h3>
+                <form id="material-upload-form" onsubmit="handleMaterialUpload(event)">
+                    <div class="input-group">
+                        <label>اسم المادة / المقرر</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-book"></i>
+                            <input type="text" id="upload-subject" placeholder="مثال: ذكاء اصطناعي، صيدلة إكلينيكية" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>نوع المحتوى</label>
+                        <div class="input-wrapper select-wrapper">
+                            <i class="fas fa-tag"></i>
+                            <select id="upload-type" onchange="toggleUploadInputs()">
+                                <option value="book">كتاب أو ملخص دراسي (PDF/ملف)</option>
+                                <option value="video-link">رابط فيديو شرح (YouTube / Drive)</option>
+                                <option value="video-file">رفع فيديو مباشر</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="input-group" id="file-upload-wrapper">
+                        <label>اختيار الملف</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-file-upload"></i>
+                            <input type="file" id="upload-file">
+                        </div>
+                    </div>
+
+                    <div class="input-group hidden" id="link-upload-wrapper">
+                        <label>رابط الفيديو الخارجي</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-link"></i>
+                            <input type="url" id="upload-url" placeholder="https://youtube.com/watch?v=...">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-login btn-upload">
+                        <span>نشر المحتوى للمنصة</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+
+            <div class="materials-stream" id="materials-stream"></div>
+        </section>
+
+        <!-- 3. AI Multi-Engine Hub -->
+        <section id="tab-ai" class="tab-view hidden">
+            <div class="ai-hub-container">
+                <div class="ai-model-selector">
+                    <span>اختر المحرك:</span>
+                    <button class="ai-model-btn active" data-engine="gemini" onclick="switchAIEngine('gemini')">Gemini</button>
+                    <button class="ai-model-btn" data-engine="gpt" onclick="switchAIEngine('gpt')">ChatGPT</button>
+                    <button class="ai-model-btn" data-engine="claude" onclick="switchAIEngine('claude')">Claude</button>
+                    <button class="ai-model-btn" data-engine="notebook" onclick="switchAIEngine('notebook')">NotebookLM</button>
+                </div>
+
+                <div class="ai-chat-box" id="ai-chat-box">
+                    <div class="ai-msg bot">
+                        <div class="ai-avatar">🤖</div>
+                        <div class="ai-bubble">
+                            مرحباً بك في مساعد NUSC الذكي المتعدد. اسألني عن أي جزئية في مقررات كليتك، تلخيص الكتب أو حل المسائل.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ai-input-area">
+                    <input type="text" id="ai-user-query" placeholder="اكتب سؤالك الأكاديمي هنا..." onkeypress="if(event.key==='Enter') sendAIMessage()">
+                    <button onclick="sendAIMessage()"><i class="fas fa-arrow-up"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Full Profile Page -->
+        <section id="tab-profile" class="tab-view hidden">
+            <div class="profile-card">
+                <div class="profile-header-bg">
+                    <div class="profile-avatar-circle">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                </div>
+                <div class="profile-body">
+                    <h2 id="profile-name">اسم المستخدم</h2>
+                    <span class="profile-role-tag" id="profile-role-tag">طالب جامعي</span>
+
+                    <div class="profile-details-grid">
+                        <div class="profile-item">
+                            <span class="label"><i class="fas fa-envelope"></i> البريد الإلكتروني الشخصي:</span>
+                            <span class="val" id="profile-email">-</span>
+                        </div>
+                        <div class="profile-item">
+                            <span class="label"><i class="fas fa-university"></i> البريد الجامعي:</span>
+                            <span class="val" id="profile-uni-email">غير محدد</span>
+                        </div>
+                        <div class="profile-item">
+                            <span class="label"><i class="fas fa-id-card"></i> كود الطالب:</span>
+                            <span class="val" id="profile-code">-</span>
+                        </div>
+                        <div class="profile-item">
+                            <span class="label"><i class="fas fa-building-columns"></i> الكلية:</span>
+                            <span class="val" id="profile-faculty">-</span>
+                        </div>
+                        <div class="profile-item">
+                            <span class="label"><i class="fas fa-layer-group"></i> الفرقة:</span>
+                            <span class="val" id="profile-year">-</span>
+                        </div>
+                        <div class="profile-item">
+                            <span class="label"><i class="fas fa-microscope"></i> التخصص:</span>
+                            <span class="val" id="profile-spec">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bottom Navigation Bar (4 Icons) -->
+    <nav class="bottom-nav">
+        <button class="nav-item active" onclick="switchDashboardTab('home')">
+            <i class="fas fa-home"></i>
+            <span>الرئيسية</span>
+        </button>
+        <button class="nav-item" onclick="switchDashboardTab('courses')">
+            <i class="fas fa-book-reader"></i>
+            <span>المقررات</span>
+        </button>
+        <button class="nav-item" onclick="switchDashboardTab('ai')">
+            <i class="fas fa-brain"></i>
+            <span>الذكاء الاصطناعي</span>
+        </button>
+        <button class="nav-item" onclick="switchDashboardTab('profile')">
+            <i class="fas fa-user"></i>
+            <span>حسابي</span>
+        </button>
+    </nav>
+</div>
     <!-- Forgot Password Modal -->
     <div id="forgot-password-modal" class="modal hidden">
         <div class="modal-overlay" onclick="closeForgotPassword()"></div>

@@ -69,3 +69,79 @@ function navigateToDashboard(user) {
     }
 }
 */
+// فتح وقفل القائمة الجانبية
+function toggleSidebar() {
+    const sidebar = document.getElementById('app-sidebar');
+    sidebar.classList.toggle('hidden');
+}
+
+// التبديل بين الأيقونات الأربعة في الشريط السفلي
+function switchDashboardTab(tabId) {
+    document.querySelectorAll('.tab-view').forEach(tab => tab.classList.add('hidden'));
+    document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
+
+    const activeView = document.getElementById(`tab-${tabId}`);
+    if (activeView) activeView.classList.remove('hidden');
+
+    const activeBtn = document.querySelector(`.nav-item[onclick="switchDashboardTab('${tabId}')"]`);
+    if (activeBtn) activeBtn.classList.add('active');
+}
+
+// تبديل محرك الذكاء الاصطناعي
+let selectedEngine = 'gemini';
+function switchAIEngine(engine) {
+    selectedEngine = engine;
+    document.querySelectorAll('.ai-model-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelector(`.ai-model-btn[data-engine="${engine}"]`).classList.add('active');
+}
+
+// إرسال استفسار للذكاء الاصطناعي
+function sendAIMessage() {
+    const input = document.getElementById('ai-user-query');
+    const text = input.value.trim();
+    if (!text) return;
+
+    const chatBox = document.getElementById('ai-chat-box');
+    chatBox.innerHTML += `
+        <div class="ai-msg user" style="justify-content: flex-end;">
+            <div class="ai-bubble" style="background: var(--primary-gold); color: #000; font-weight:600;">${text}</div>
+        </div>
+    `;
+
+    input.value = '';
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    setTimeout(() => {
+        chatBox.innerHTML += `
+            <div class="ai-msg bot">
+                <div class="ai-avatar">⚡</div>
+                <div class="ai-bubble">تمت المعالجة عبر (${selectedEngine.toUpperCase()}): جاري تحليل سؤالك الأكاديمي وتقديم الشرح...</div>
+            </div>
+        `;
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }, 700);
+}
+
+// تبديل خيارات الرفع (فيديو / رابط / كتاب)
+function toggleUploadInputs() {
+    const type = document.getElementById('upload-type').value;
+    const fileWrapper = document.getElementById('file-upload-wrapper');
+    const linkWrapper = document.getElementById('link-upload-wrapper');
+
+    if (type === 'video-link') {
+        fileWrapper.classList.add('hidden');
+        linkWrapper.classList.remove('hidden');
+    } else {
+        fileWrapper.classList.remove('hidden');
+        linkWrapper.classList.add('hidden');
+    }
+}
+
+function handleMaterialUpload(e) {
+    e.preventDefault();
+    const subject = document.getElementById('upload-subject').value;
+    const type = document.getElementById('upload-type').value;
+
+    showToast(`تم رفع محتوى [${subject}] بنجاح!`, 'success');
+    e.target.reset();
+}

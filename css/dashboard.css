@@ -1,0 +1,367 @@
+/* ==================== DASHBOARD CORE & THEME ==================== */
+.app-dashboard {
+    min-height: 100vh;
+    background-color: var(--primary-black);
+    color: var(--white);
+    padding-bottom: 85px;
+}
+
+.app-header {
+    height: 65px;
+    background: rgba(22, 33, 62, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(212, 168, 67, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.menu-btn {
+    background: none;
+    border: none;
+    color: var(--primary-gold);
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+
+.faculty-badge-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    color: var(--primary-gold-light);
+}
+
+.header-user-avatar img {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1.5px solid var(--primary-gold);
+    cursor: pointer;
+}
+
+/* Sidebar Drawer */
+.app-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5000;
+}
+
+.sidebar-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+}
+
+.sidebar-content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 280px;
+    height: 100%;
+    background: #111827;
+    border-left: 1px solid rgba(212, 168, 67, 0.2);
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.sidebar-logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid var(--primary-gold);
+    margin-bottom: 8px;
+}
+
+.sidebar-menu {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.sidebar-menu li {
+    padding: 12px 15px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--gray-light);
+    transition: var(--transition-fast);
+}
+
+.sidebar-menu li:hover {
+    background: rgba(212, 168, 67, 0.15);
+    color: var(--primary-gold);
+}
+
+.sidebar-menu .divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 10px 0;
+    padding: 0;
+}
+
+.sidebar-menu .logout-link {
+    color: var(--danger);
+}
+
+/* Bottom Bar */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 65px;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(15px);
+    border-top: 1px solid rgba(212, 168, 67, 0.25);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 2000;
+}
+
+.nav-item {
+    background: none;
+    border: none;
+    color: var(--gray);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--font-family);
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.nav-item i {
+    font-size: 1.2rem;
+}
+
+.nav-item.active {
+    color: var(--primary-gold);
+    transform: translateY(-2px);
+}
+
+/* Faculty Banner */
+.faculty-hero-banner {
+    padding: 35px 20px;
+    background: linear-gradient(135deg, rgba(212, 168, 67, 0.15), rgba(15, 52, 96, 0.6));
+    border-bottom: 1px solid rgba(212, 168, 67, 0.2);
+    text-align: center;
+}
+
+.faculty-big-icon {
+    font-size: 3rem;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+/* Section Box */
+.dashboard-section {
+    padding: 20px;
+}
+
+.dashboard-section h3 {
+    color: var(--primary-gold);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.subjects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+}
+
+.subject-card {
+    background: rgba(26, 26, 46, 0.7);
+    border: 1px solid rgba(212, 168, 67, 0.2);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    text-align: center;
+    font-weight: 700;
+    color: #FFF;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* AI Engine */
+.ai-hub-container {
+    max-width: 700px;
+    margin: 20px auto;
+    background: rgba(26, 26, 46, 0.7);
+    border: 1px solid rgba(212, 168, 67, 0.2);
+    border-radius: var(--radius-md);
+    padding: 15px;
+}
+
+.ai-model-selector {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.ai-model-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(212, 168, 67, 0.2);
+    color: var(--white);
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.ai-model-btn.active {
+    background: var(--primary-gold);
+    color: #000;
+    font-weight: 700;
+}
+
+.ai-chat-box {
+    height: 350px;
+    overflow-y: auto;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.ai-msg {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.ai-bubble {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-sm);
+    padding: 10px 15px;
+    max-width: 80%;
+    font-size: 0.9rem;
+}
+
+.ai-input-area {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.ai-input-area input {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(212, 168, 67, 0.3);
+    border-radius: var(--radius-sm);
+    padding: 12px;
+    color: #FFF;
+    outline: none;
+}
+
+.ai-input-area button {
+    background: var(--primary-gold);
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 0 18px;
+    cursor: pointer;
+}
+
+/* Upload Card */
+.upload-container-card {
+    background: rgba(26, 26, 46, 0.8);
+    border: 1px solid rgba(212, 168, 67, 0.2);
+    border-radius: var(--radius-md);
+    padding: 25px;
+    margin: 20px;
+}
+
+.upload-container-card h3 {
+    color: var(--primary-gold);
+    margin-bottom: 15px;
+}
+
+/* Profile Card */
+.profile-card {
+    max-width: 600px;
+    margin: 20px auto;
+    background: rgba(26, 26, 46, 0.8);
+    border: 1px solid rgba(212, 168, 67, 0.25);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.profile-header-bg {
+    height: 100px;
+    background: linear-gradient(135deg, var(--primary-navy), var(--primary-gold-dark));
+    position: relative;
+}
+
+.profile-avatar-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #000;
+    border: 3px solid var(--primary-gold);
+    position: absolute;
+    bottom: -40px;
+    right: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--primary-gold);
+}
+
+.profile-body {
+    padding: 50px 30px 30px;
+}
+
+.profile-details-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.profile-item {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 8px;
+}
+
+.profile-item .label {
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+
+.profile-item .val {
+    color: var(--primary-gold-light);
+    font-weight: 600;
+}
