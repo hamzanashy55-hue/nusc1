@@ -145,3 +145,70 @@ function handleMaterialUpload(e) {
     showToast(`تم رفع محتوى [${subject}] بنجاح!`, 'success');
     e.target.reset();
 }
+
+
+
+// بيانات تجريبية سريعة لكل كلية
+const facultyMockData = {
+    cs: {
+        name: "كلية الحاسبات والمعلومات والذكاء الاصطناعي",
+        icon: "💻",
+        desc: "قسم علوم الحاسب، نظم المعلومات، والذكاء الاصطناعي",
+        subjects: ["تراكيب بيانات وخوارزميات", "مقدمة في الذكاء الاصطناعي", "هندسة البرمجيات", "قواعد بيانات متقدمة"]
+    },
+    pharmacy: {
+        name: "كلية الصيدلة الإكلينيكية",
+        icon: "💊",
+        desc: "قسم الكيمياء الدوائية، العقاقير، والصيدلانيات",
+        subjects: ["كيمياء حيوية", "علم الأدوية (Pharmacology)", "صيدلة إكلينيكية", "تشريح وعلم وظائف الأعضاء"]
+    },
+    science: {
+        name: "كلية العلوم",
+        icon: "🔬",
+        desc: "أقسام الكيمياء، الفيزياء، والرياضيات الحيوية",
+        subjects: ["كيمياء عضوية", "تفاضل وتكامل", "فيزياء عامة 1", "علم النبات والخلية"]
+    },
+    vet: {
+        name: "كلية الطب البيطري",
+        icon: "🐾",
+        desc: "التشريح البيطري، الرقابة الصحية، والطب الوقائي",
+        subjects: ["تشريح بيطري", "علم الأنسجة (Histology)", "بكتيريا ومناعة بيطرية", "صحة الحيوان"]
+    },
+    business: {
+        name: "كلية إدارة الأعمال وتكنولوجيا المعلومات",
+        icon: "📊",
+        desc: "إدارة المؤسسات، ريادة الأعمال، والأنظمة المالية الرقمية",
+        subjects: ["مبادئ الإدارة الحديثة", "محاسبة مالية", "التسويق الرقمي", "اقتصاد كلي"]
+    }
+};
+
+// دالة التبديل السريع للكلية
+function previewFaculty(facultyKey) {
+    const data = facultyMockData[facultyKey];
+    if (!data) return;
+
+    // تحديث الهيدر والبانر
+    document.getElementById('header-faculty-name').textContent = data.name;
+    document.getElementById('header-faculty-icon').textContent = data.icon;
+    document.getElementById('faculty-hero-title').textContent = data.name;
+    document.getElementById('faculty-hero-icon').textContent = data.icon;
+    document.getElementById('faculty-hero-desc').textContent = data.desc;
+
+    // تحديث شبكة المواد فوراً
+    const grid = document.getElementById('faculty-subjects-grid');
+    if (grid) {
+        grid.innerHTML = data.subjects.map(sub => `
+            <div class="subject-card">
+                <i class="fas fa-book-reader" style="font-size: 1.5rem; color: var(--primary-gold); margin-bottom: 8px; display:block;"></i>
+                ${sub}
+            </div>
+        `).join('');
+    }
+
+    // إظهار لوحة التحكم والتبويب الرئيسي
+    document.getElementById('splash-screen').classList.add('hidden');
+    document.getElementById('campus-screen').classList.add('hidden');
+    document.getElementById('login-page').classList.add('hidden');
+    document.getElementById('app-dashboard').classList.remove('hidden');
+    switchDashboardTab('home');
+}

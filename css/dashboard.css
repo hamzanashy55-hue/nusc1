@@ -365,3 +365,41 @@
     color: var(--primary-gold-light);
     font-weight: 600;
 }
+
+
+
+/* Quick Dev Switcher Bar */
+.dev-faculty-bar {
+    background: #0f172a;
+    border-bottom: 1px solid rgba(212, 168, 67, 0.4);
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.dev-faculty-bar span {
+    font-size: 0.8rem;
+    color: var(--primary-gold);
+    font-weight: 700;
+}
+
+.dev-faculty-bar button {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(212, 168, 67, 0.3);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-family: var(--font-family);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.dev-faculty-bar button:hover {
+    background: var(--primary-gold);
+    color: #000;
+    font-weight: 700;
+}
